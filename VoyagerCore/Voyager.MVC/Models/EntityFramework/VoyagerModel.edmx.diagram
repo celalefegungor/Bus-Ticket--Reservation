@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e8aca710267466cbac40b6b2f2e797b" Name="Diagram1">
+        <EntityTypeShape EntityType="VoyagerConnectionModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Bus" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.BusType" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Driver" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Expedition" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Host" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Person" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Route" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Ticket" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Bus_dbo_BusType_BusTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Expedition_dbo_Bus_BusId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Driver_dbo_Person_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Expedition_dbo_Route_RouteId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Expedition_dbo_Ticket_Ticket_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Ticket_dbo_Expedition_ExpeditionId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Host_dbo_Person_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.FK_dbo_Ticket_dbo_Person_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.DriverPocExpeditionPocs" ManuallyRouted="false" />
+        <AssociationConnector Association="VoyagerConnectionModel.HostPocExpeditionPocs" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Kisiler" Width="1.5" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="VoyagerConnectionModel.Mal" Width="1.5" PointX="8.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

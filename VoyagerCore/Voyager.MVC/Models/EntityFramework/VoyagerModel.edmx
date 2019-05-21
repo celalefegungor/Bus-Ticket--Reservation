@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VoyagerConnectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Make" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Plate" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="BusTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="SeatCount" Type="int" Nullable="false" />
+          <Property Name="HasToilet" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseType" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DriverPocExpeditionPocs">
+          <Key>
+            <PropertyRef Name="DriverPoc_Id" />
+            <PropertyRef Name="ExpeditionPoc_Id" />
+          </Key>
+          <Property Name="DriverPoc_Id" Type="int" Nullable="false" />
+          <Property Name="ExpeditionPoc_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expedition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstimatedDepartureTime" Type="datetime" Nullable="false" />
+          <Property Name="EstimatedArrivalTime" Type="datetime" Nullable="false" />
+          <Property Name="HasSnackService" Type="bit" Nullable="false" />
+          <Property Name="DepartureLocation" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="ArrivalLocation" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+          <Property Name="RouteName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="BusId" Type="int" Nullable="false" />
+          <Property Name="RouteId" Type="int" Nullable="false" />
+          <Property Name="Ticket_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HostPocExpeditionPocs">
+          <Key>
+            <PropertyRef Name="HostPoc_Id" />
+            <PropertyRef Name="ExpeditionPoc_Id" />
+          </Key>
+          <Property Name="HostPoc_Id" Type="int" Nullable="false" />
+          <Property Name="ExpeditionPoc_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kisiler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentityNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="DepartureLocation" Type="nvarchar(max)" />
+          <Property Name="ArrivalLocation" Type="nvarchar(max)" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="BreakCount" Type="int" Nullable="false" />
+          <Property Name="BasePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeatNumber" Type="int" Nullable="false" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ExpeditionId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Bus_dbo_BusType_BusTypeId">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Driver_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DriverPocExpeditionPocs_dbo_Driver_DriverPoc_Id">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DriverPocExpeditionPocs" Type="Self.DriverPocExpeditionPocs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DriverPocExpeditionPocs">
+              <PropertyRef Name="DriverPoc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DriverPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id">
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DriverPocExpeditionPocs" Type="Self.DriverPocExpeditionPocs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expedition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DriverPocExpeditionPocs">
+              <PropertyRef Name="ExpeditionPoc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Bus_BusId">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Route_RouteId">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Ticket_Ticket_Id">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="Ticket_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Host_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Host" Type="Self.Host" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_HostPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id">
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HostPocExpeditionPocs" Type="Self.HostPocExpeditionPocs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expedition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostPocExpeditionPocs">
+              <PropertyRef Name="ExpeditionPoc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_HostPocExpeditionPocs_dbo_Host_HostPoc_Id">
+          <End Role="Host" Type="Self.Host" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HostPocExpeditionPocs" Type="Self.HostPocExpeditionPocs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HostPocExpeditionPocs">
+              <PropertyRef Name="HostPoc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ticket_dbo_Expedition_ExpeditionId">
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expedition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ExpeditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ticket_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VoyagerConnectionModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DriverPocExpeditionPocs" EntityType="Self.DriverPocExpeditionPocs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expedition" EntityType="Self.Expedition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Host" EntityType="Self.Host" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostPocExpeditionPocs" EntityType="Self.HostPocExpeditionPocs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kisiler" EntityType="Self.Kisiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mal" EntityType="Self.Mal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Bus_dbo_BusType_BusTypeId" Association="Self.FK_dbo_Bus_dbo_BusType_BusTypeId">
+            <End Role="BusType" EntitySet="BusType" />
+            <End Role="Bus" EntitySet="Bus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Driver_dbo_Person_PersonId" Association="Self.FK_dbo_Driver_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DriverPocExpeditionPocs_dbo_Driver_DriverPoc_Id" Association="Self.FK_dbo_DriverPocExpeditionPocs_dbo_Driver_DriverPoc_Id">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="DriverPocExpeditionPocs" EntitySet="DriverPocExpeditionPocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DriverPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id" Association="Self.FK_dbo_DriverPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id">
+            <End Role="Expedition" EntitySet="Expedition" />
+            <End Role="DriverPocExpeditionPocs" EntitySet="DriverPocExpeditionPocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Bus_BusId" Association="Self.FK_dbo_Expedition_dbo_Bus_BusId">
+            <End Role="Bus" EntitySet="Bus" />
+            <End Role="Expedition" EntitySet="Expedition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Route_RouteId" Association="Self.FK_dbo_Expedition_dbo_Route_RouteId">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="Expedition" EntitySet="Expedition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Ticket_Ticket_Id" Association="Self.FK_dbo_Expedition_dbo_Ticket_Ticket_Id">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Expedition" EntitySet="Expedition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Host_dbo_Person_PersonId" Association="Self.FK_dbo_Host_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Host" EntitySet="Host" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_HostPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id" Association="Self.FK_dbo_HostPocExpeditionPocs_dbo_Expedition_ExpeditionPoc_Id">
+            <End Role="Expedition" EntitySet="Expedition" />
+            <End Role="HostPocExpeditionPocs" EntitySet="HostPocExpeditionPocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_HostPocExpeditionPocs_dbo_Host_HostPoc_Id" Association="Self.FK_dbo_HostPocExpeditionPocs_dbo_Host_HostPoc_Id">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="HostPocExpeditionPocs" EntitySet="HostPocExpeditionPocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ticket_dbo_Expedition_ExpeditionId" Association="Self.FK_dbo_Ticket_dbo_Expedition_ExpeditionId">
+            <End Role="Expedition" EntitySet="Expedition" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ticket_dbo_Person_PersonId" Association="Self.FK_dbo_Ticket_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VoyagerConnectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Make" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Plate" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusType" Relationship="Self.FK_dbo_Bus_dbo_BusType_BusTypeId" FromRole="Bus" ToRole="BusType" />
+          <NavigationProperty Name="Expeditions" Relationship="Self.FK_dbo_Expedition_dbo_Bus_BusId" FromRole="Bus" ToRole="Expedition" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeatCount" Type="Int32" Nullable="false" />
+          <Property Name="HasToilet" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK_dbo_Bus_dbo_BusType_BusTypeId" FromRole="BusType" ToRole="Bus" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseType" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Driver_dbo_Person_PersonId" FromRole="Driver" ToRole="Person" />
+          <NavigationProperty Name="Expeditions" Relationship="Self.DriverPocExpeditionPocs" FromRole="Driver" ToRole="Expedition" />
+        </EntityType>
+        <EntityType Name="Expedition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstimatedDepartureTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstimatedArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HasSnackService" Type="Boolean" Nullable="false" />
+          <Property Name="DepartureLocation" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ArrivalLocation" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <Property Name="RouteName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusId" Type="Int32" Nullable="false" />
+          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <Property Name="Ticket_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK_dbo_Expedition_dbo_Bus_BusId" FromRole="Expedition" ToRole="Bus" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_dbo_Expedition_dbo_Route_RouteId" FromRole="Expedition" ToRole="Route" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_dbo_Expedition_dbo_Ticket_Ticket_Id" FromRole="Expedition" ToRole="Ticket" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_dbo_Ticket_dbo_Expedition_ExpeditionId" FromRole="Expedition" ToRole="Ticket" />
+          <NavigationProperty Name="Drivers" Relationship="Self.DriverPocExpeditionPocs" FromRole="Expedition" ToRole="Driver" />
+          <NavigationProperty Name="Hosts" Relationship="Self.HostPocExpeditionPocs" FromRole="Expedition" ToRole="Host" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Host_dbo_Person_PersonId" FromRole="Host" ToRole="Person" />
+          <NavigationProperty Name="Expeditions" Relationship="Self.HostPocExpeditionPocs" FromRole="Host" ToRole="Expedition" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentityNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_dbo_Driver_dbo_Person_PersonId" FromRole="Person" ToRole="Driver" />
+          <NavigationProperty Name="Hosts" Relationship="Self.FK_dbo_Host_dbo_Person_PersonId" FromRole="Person" ToRole="Host" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_dbo_Ticket_dbo_Person_PersonId" FromRole="Person" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartureLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArrivalLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="BreakCount" Type="Int32" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Expeditions" Relationship="Self.FK_dbo_Expedition_dbo_Route_RouteId" FromRole="Route" ToRole="Expedition" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeatNumber" Type="Int32" Nullable="false" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="ExpeditionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Expeditions" Relationship="Self.FK_dbo_Expedition_dbo_Ticket_Ticket_Id" FromRole="Ticket" ToRole="Expedition" />
+          <NavigationProperty Name="Expedition" Relationship="Self.FK_dbo_Ticket_dbo_Expedition_ExpeditionId" FromRole="Ticket" ToRole="Expedition" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Ticket_dbo_Person_PersonId" FromRole="Ticket" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_dbo_Bus_dbo_BusType_BusTypeId">
+          <End Role="BusType" Type="Self.BusType" Multiplicity="1" />
+          <End Role="Bus" Type="Self.Bus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bus">
+              <PropertyRef Name="BusTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Bus_BusId">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1" />
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="BusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Driver_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Route_RouteId">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Expedition_dbo_Ticket_Ticket_Id">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Expedition">
+              <PropertyRef Name="Ticket_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ticket_dbo_Expedition_ExpeditionId">
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expedition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ExpeditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Host_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Host" Type="Self.Host" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ticket_dbo_Person_PersonId">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DriverPocExpeditionPocs">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+        </Association>
+        <Association Name="HostPocExpeditionPocs">
+          <End Role="Expedition" Type="Self.Expedition" Multiplicity="*" />
+          <End Role="Host" Type="Self.Host" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="VoyagerConnectionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="BusTypes" EntityType="Self.BusType" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Expeditions" EntityType="Self.Expedition" />
+          <EntitySet Name="Hosts" EntityType="Self.Host" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <AssociationSet Name="FK_dbo_Bus_dbo_BusType_BusTypeId" Association="Self.FK_dbo_Bus_dbo_BusType_BusTypeId">
+            <End Role="BusType" EntitySet="BusTypes" />
+            <End Role="Bus" EntitySet="Buses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Bus_BusId" Association="Self.FK_dbo_Expedition_dbo_Bus_BusId">
+            <End Role="Bus" EntitySet="Buses" />
+            <End Role="Expedition" EntitySet="Expeditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Driver_dbo_Person_PersonId" Association="Self.FK_dbo_Driver_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Route_RouteId" Association="Self.FK_dbo_Expedition_dbo_Route_RouteId">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Expedition" EntitySet="Expeditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Expedition_dbo_Ticket_Ticket_Id" Association="Self.FK_dbo_Expedition_dbo_Ticket_Ticket_Id">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Expedition" EntitySet="Expeditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ticket_dbo_Expedition_ExpeditionId" Association="Self.FK_dbo_Ticket_dbo_Expedition_ExpeditionId">
+            <End Role="Expedition" EntitySet="Expeditions" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Host_dbo_Person_PersonId" Association="Self.FK_dbo_Host_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Host" EntitySet="Hosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ticket_dbo_Person_PersonId" Association="Self.FK_dbo_Ticket_dbo_Person_PersonId">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="DriverPocExpeditionPocs" Association="Self.DriverPocExpeditionPocs">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Expedition" EntitySet="Expeditions" />
+          </AssociationSet>
+          <AssociationSet Name="HostPocExpeditionPocs" Association="Self.HostPocExpeditionPocs">
+            <End Role="Expedition" EntitySet="Expeditions" />
+            <End Role="Host" EntitySet="Hosts" />
+          </AssociationSet>
+          <EntitySet Name="Kisilers" EntityType="VoyagerConnectionModel.Kisiler" />
+          <EntitySet Name="Mals" EntityType="VoyagerConnectionModel.Mal" />
+        </EntityContainer>
+        <EntityType Name="Kisiler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Mal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VoyagerConnectionModelStoreContainer" CdmEntityContainer="VoyagerConnectionEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Plate" ColumnName="Plate" />
+                <ScalarProperty Name="BusTypeId" ColumnName="BusTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTypes">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.BusType">
+              <MappingFragment StoreEntitySet="BusType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SeatCount" ColumnName="SeatCount" />
+                <ScalarProperty Name="HasToilet" ColumnName="HasToilet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LicenseType" ColumnName="LicenseType" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expeditions">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Expedition">
+              <MappingFragment StoreEntitySet="Expedition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EstimatedDepartureTime" ColumnName="EstimatedDepartureTime" />
+                <ScalarProperty Name="EstimatedArrivalTime" ColumnName="EstimatedArrivalTime" />
+                <ScalarProperty Name="HasSnackService" ColumnName="HasSnackService" />
+                <ScalarProperty Name="DepartureLocation" ColumnName="DepartureLocation" />
+                <ScalarProperty Name="ArrivalLocation" ColumnName="ArrivalLocation" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+                <ScalarProperty Name="BusId" ColumnName="BusId" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="Ticket_Id" ColumnName="Ticket_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hosts">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Host">
+              <MappingFragment StoreEntitySet="Host">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdentityNumber" ColumnName="IdentityNumber" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartureLocation" ColumnName="DepartureLocation" />
+                <ScalarProperty Name="ArrivalLocation" ColumnName="ArrivalLocation" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="BreakCount" ColumnName="BreakCount" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ExpeditionId" ColumnName="ExpeditionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DriverPocExpeditionPocs" TypeName="VoyagerConnectionModel.DriverPocExpeditionPocs" StoreEntitySet="DriverPocExpeditionPocs">
+            <EndProperty Name="Driver">
+              <ScalarProperty Name="Id" ColumnName="DriverPoc_Id" />
+            </EndProperty>
+            <EndProperty Name="Expedition">
+              <ScalarProperty Name="Id" ColumnName="ExpeditionPoc_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="HostPocExpeditionPocs" TypeName="VoyagerConnectionModel.HostPocExpeditionPocs" StoreEntitySet="HostPocExpeditionPocs">
+            <EndProperty Name="Expedition">
+              <ScalarProperty Name="Id" ColumnName="ExpeditionPoc_Id" />
+            </EndProperty>
+            <EndProperty Name="Host">
+              <ScalarProperty Name="Id" ColumnName="HostPoc_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Kisilers">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Kisiler">
+              <MappingFragment StoreEntitySet="Kisiler">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mals">
+            <EntityTypeMapping TypeName="VoyagerConnectionModel.Mal">
+              <MappingFragment StoreEntitySet="Mal">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

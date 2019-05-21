@@ -1,0 +1,57 @@
+﻿@model List<Voyager.MVC.Models.EntityFramework.Person>
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #x {
+        text-align: center
+    }
+</style>
+<h2>Kişi Listesi</h2>
+<hr />
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+
+            <th id="x">T.C</th>
+            <th id="x">Cinsiyet</th>
+            <th id="x">Ad</th>
+            <th id="x">Soyad</th>
+            <th id="x">Doğum Tarihi</th>
+            <th id="x">Yaş</th>
+            <th id="x">Güncelle</th>
+            <th id="x">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center">
+                <td>@item.IdentityNumber</td>
+                @if (item.Gender == 2)
+                {
+                    <td><i style="font-size:40px;" class="fas fa-male"></i></td>
+                }
+                else if(item.Gender == 1)
+                {
+                    <td><i style="font-size:40px;" class="fas fa-female"></i></td>
+                }
+                else
+                {
+                    <td><i style="font-size:30px;" class="fas fa-question"></i></td>  
+                }
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.DateOfBirth.ToShortDateString()</td>
+                <td>@(DateTime.Now.Year - item.DateOfBirth.Year)</td>
+                <td><a href="/Person/Edit/@item.Id" class="btn btn-info">Güncelle</a></td>
+                <td><a href="/Person/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<a href="/Person/New" class="btn btn-primary">KİŞİ EKLE</a>
+
